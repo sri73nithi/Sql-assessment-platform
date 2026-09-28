@@ -1,6 +1,7 @@
 fastapi
-uvicorn
+uvicorn[standard]
 sqlalchemy
+greenlet
 # asyncpg (Required for PostgreSQL Production Mode)
 # psycopg2-binary (Required for PostgreSQL Production Mode)
 pydantic
