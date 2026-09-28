@@ -1,0 +1,377 @@
+AI-Powered SQL Assessment Management System
+1. Project Overview
+The 
+AI-Powered SQL Assessment Management System
+ is a web-based platform designed to automate the process of assessing SQL knowledge in educational institutions, corporate training programs, and coding 
+bootcamps
+. Unlike traditional Learning Management Systems (LMS), this platform does 
+not provide learning materials or lessons
+. Instead, it focuses entirely on 
+evaluating a user's understanding of assigned SQL topics
+ through automatically generated assessments.
+The platform enables administrators to create assessments by selecting SQL topics, difficulty levels, number of questions, and assessment duration. Using Artificial Intelligence, the system dynamically generates SQL questions based on the selected topics. Students then solve these questions using an integrated SQL editor, and their queries 
+are automatically executed, evaluated, and scored
+.
+Beyond checking whether the output is correct, the AI also 
+analyzes
+ the quality of the SQL query, including its efficiency, readability, coding standards, and logical correctness. The platform then generates detailed feedback and maintains progress reports for both students 
+and
+ administrators.
+2. Problem Statement
+In many organizations and educational institutions, SQL assessments 
+are conducted
+ manually. Trainers are responsible for preparing questions, evaluating answers, calculating scores, and identifying students' weak areas. This process is time-consuming, inconsistent, and difficult to scale.
+Additionally, students often receive only a final score without understanding why their solution was inefficient or incorrect. There is also no systematic way to track progress across different SQL topics.
+To overcome these limitations, an automated assessment platform is required that can generate questions, evaluate SQL queries intelligently, provide detailed feedback, and maintain comprehensive performance analytics.
+3. Project Objective
+The primary objective of this project is to develop an AI-powered platform that automatically validates users' SQL knowledge through intelligent assessments.
+The system aims to:
+Allow administrators to create SQL assessments by selecting predefined topics. 
+Automatically generate SQL questions using Artificial Intelligence. 
+Execute submitted SQL queries securely. 
+Compare the generated output with expected results. 
+Analyze
+ query quality using AI. 
+Calculate scores automatically. 
+Generate detailed performance reports. 
+Track individual and overall student progress. 
+Export assessment results as CSV reports. 
+4. System Workflow
+Administrator
+      │
+      ▼
+Create Assessment
+      │
+      ▼
+Select SQL Topics
+      │
+      ▼
+Choose Difficulty Level
+      │
+      ▼
+Specify Number of Questions
+      │
+      ▼
+AI Generates SQL Questions
+      │
+      ▼
+Publish Assessment
+      │
+      ▼
+Student Takes Assessment
+      │
+      ▼
+Student Submits SQL Queries
+      │
+      ▼
+SQL Execution Engine
+      │
+      ▼
+Compare Output with Expected Result
+      │
+      ▼
+AI Reviews Query Quality
+      │
+      ▼
+Automatic Scoring
+      │
+      ▼
+Performance Dashboard & Reports
+5. System Modules
+Module 1 – User Authentication
+The system provides secure authentication for different user roles.
+Admin
+Login 
+Dashboard access 
+Assessment management 
+Student performance monitoring 
+Student
+Login 
+View assigned assessments 
+Submit SQL queries 
+View scores and feedback 
+Module 2 – Topic Management
+Instead of uploading learning materials, the administrator maintains a structured list of SQL topics.
+Example:
+Beginner Level
+Basic DDL 
+DML 
+SELECT 
+WHERE 
+ORDER BY 
+Intermediate Level
+GROUP BY 
+HAVING 
+JOINS 
+Views 
+Advanced Level
+Subqueries 
+Common Table Expressions (CTE) 
+Window Functions 
+Stored Procedures 
+These topics serve as the foundation for generating assessments.
+Module 3 – Assessment Creation
+The administrator can create assessments using 
+two different methods
+.
+Option 1 – Manual Assessment Creation
+In this mode, the administrator creates the assessment manually.
+The administrator specifies:
+Assessment Name 
+Difficulty Level 
+Duration 
+SQL Topic(s) 
+Number of Questions 
+Then, for each question, the administrator enters:
+Question Title 
+Problem Statement 
+Database Schema (optional) 
+Expected SQL Query (Answer Key) 
+Expected Output (optional) 
+Marks 
+Example
+Assessment Name:
+ Daily SQL Test – Joins
+Question 1
+Problem Statement:
+Display the names of customers along with the products they purchased.
+Expected SQL Answer:
+SELECT 
+c.CustomerName
+,
+       
+p.ProductName
+FROM Customers c
+JOIN Orders o
+ON 
+c.CustomerID
+ = 
+o.CustomerID
+JOIN Products p
+ON 
+o.ProductID
+ = 
+p.ProductID
+;
+Marks:
+ 10
+The system stores this as the official solution and uses it during evaluation.
+Option 2 – AI-Generated Assessment
+In this mode, the administrator only configures the assessment.
+Example:
+Assessment Name: Daily SQL Test
+Topics:
+JOINS 
+GROUP BY 
+Difficulty
+:
+Intermediate
+Number of Questions
+:
+5
+Duration
+:
+30 Minutes
+The administrator clicks:
+Generate Questions
+The AI automatically generates:
+Question statements 
+Database schema (if required) 
+Expected SQL solution 
+Expected output 
+Marks 
+The administrator can review and edit the generated content before publishing.
+AI Generation Workflow
+Admin
+   │
+   ▼
+Select Topics
+   │
+   ▼
+Choose Difficulty
+   │
+   ▼
+Specify Number of Questions
+   │
+   ▼
+Click "Generate"
+   │
+   ▼
+AI Generates:
+• Questions
+• Answer Keys
+• Expected Results
+   │
+   ▼
+Admin Reviews
+   │
+   ▼
+Publish Assessment
+Module 4 – AI Question Generation
+This is the core feature of the system.
+Based on the selected topics and difficulty level, the AI generates SQL questions dynamically.
+Example:
+Topic:
+ JOINS
+Generated Questions:
+Display customer names along with the products they purchased. 
+Find customers who have never placed an order. 
+Display total sales for each product category. 
+Retrieve the top five customers based on total purchase amount. 
+Display employees who have generated revenue greater than the department average. 
+Every assessment can contain different questions while testing the same SQL concepts, minimizing repetition and encouraging conceptual understanding.
+Module 5 – Student Assessment Interface
+Students access the assigned assessment through a web interface.
+Each question includes:
+Problem description 
+Database schema 
+Sample data 
+SQL editor 
+Submit button 
+Students write and submit SQL queries directly within the platform.
+Module 6 – SQL Execution Engine
+Submitted SQL queries 
+are executed
+ within a secure sandbox database environment.
+The system:
+Executes the student's query. 
+Produces the output. 
+Compares the output with the expected result. 
+Determines whether the solution is correct. 
+This ensures objective and accurate evaluation.
+Module 7 – AI-Based Query Analysis
+In addition to checking correctness, the AI evaluates the quality of the submitted SQL query.
+The AI reviews:
+Logical correctness 
+Query efficiency 
+SQL coding standards 
+Readability 
+Proper JOIN usage 
+Alias usage 
+Formatting 
+Unnecessary operations 
+Example Feedback:
+Output: Correct
+Efficiency: Good
+Readability: Excellent
+Suggestions:
+• Avoid using SELECT *
+• Use INNER JOIN instead of implicit joins
+• Remove unnecessary nested queries
+Overall Rating: Excellent
+This helps students improve their SQL coding practices rather than simply obtaining the correct answer.
+Module 8 – Automatic Scoring
+Scores 
+are generated
+ based on multiple evaluation criteria.
+Evaluation Criteria
+Weightage
+Correct Output
+50%
+Query Logic
+20%
+Efficiency
+15%
+SQL Standards
+10%
+Readability
+5%
+Total
+100%
+This scoring system ensures a fair assessment of both correctness and code quality.
+Module 9 – Performance Dashboard
+The platform provides detailed analytics for administrators.
+Dashboard features include:
+Total assessments conducted 
+Number of students participated 
+Average score 
+Highest score 
+Lowest score 
+Topic-wise performance 
+Weak topic analysis 
+Student ranking 
+Assessment history 
+This enables trainers to monitor learning progress effectively.
+Module 10 – Report Generation
+After every assessment, the system automatically generates downloadable reports.
+Individual Report
+Student
+Assessment
+Score
+John
+Daily SQL Test
+90
+Rahul
+Daily SQL Test
+85
+CSV Export
+Student 
+Name
+,Assessment,Score
+John
+,Daily
+ SQL Test,90
+Rahul
+,Daily
+ SQL Test,85
+Priya
+,Daily
+ SQL Test,95
+These reports 
+can be used
+ for attendance, performance tracking, and management reviews.
+6. User Roles
+Administrator
+The administrator can:
+Manage SQL topics. 
+Create assessments. 
+Select topics and difficulty levels. 
+Generate AI-based questions. 
+Publish assessments. 
+Monitor student performance. 
+Export reports. 
+View analytics dashboards. 
+Student
+The student can:
+Login securely. 
+View assigned assessments. 
+Solve SQL questions. 
+Submit SQL queries. 
+Receive AI-generated feedback. 
+View assessment history. 
+Track individual progress. 
+7. Technology Stack
+Component
+Technology
+Frontend
+React.js / Next.js
+Backend
+Python (
+FastAPI
+) or Node.js (Express.js)
+Database
+PostgreSQL / MySQL
+SQL Execution Engine
+Docker Sandbox with PostgreSQL
+AI Integration
+OpenAI
+ API or Local LLM
+Authentication
+JWT / Firebase Authentication
+Report Generation
+Pandas (CSV), 
+ReportLab
+ (PDF)
+Dashboard
+Chart.js / 
+Recharts
+8. Expected Outcomes
+The proposed system will:
+Eliminate manual assessment preparation. 
+Reduce evaluation time. 
+Generate unique SQL questions automatically. 
+Provide consistent and objective scoring. 
+Offer AI-driven feedback for learning improvement. 
+Track student progress across multiple assessments. 
+Identify weak SQL topics. 
+Simplify report generation and performance analysis.

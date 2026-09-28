@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: sql_assessment_app_db
+    restart: always
+    environment:
+      POSTGRES_DB: sql_assessment_platform
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin_secure_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - platform-network
+
+  sandbox-db:
+    image: postgres:16-alpine
+    container_name: sql_assessment_sandbox_db
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: sandbox_admin
+      POSTGRES_PASSWORD: sandbox_admin_secure_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./sandbox.sql:/docker-entrypoint-initdb.d/init-sandbox.sql
+    networks:
+      - platform-network
+
+  backend:
+    build:
+      context: ../
+      dockerfile: docker/backend.Dockerfile
+    container_name: sql_assessment_backend
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://admin:admin_secure_password@db:5432/sql_assessment_platform
+      - SANDBOX_DATABASE_URL=postgresql://sandbox_admin:sandbox_admin_secure_password@sandbox-db:5432/postgres
+      - JWT_SECRET=super_secret_jwt_key_for_sql_assessment_platform_2026
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - ENVIRONMENT=production
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - sandbox-db
+    networks:
+      - platform-network
+
+  frontend:
+    image: node:22-alpine
+    container_name: sql_assessment_frontend
+    working_dir: /app
+    volumes:
+      - ../frontend:/app
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install && npm run dev"
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    networks:
+      - platform-network
+
+volumes:
+  pgdata:
+
+networks:
+  platform-network:
+    driver: bridge

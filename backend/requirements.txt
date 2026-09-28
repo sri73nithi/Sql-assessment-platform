@@ -1,0 +1,18 @@
+fastapi
+uvicorn
+sqlalchemy
+# asyncpg (Required for PostgreSQL Production Mode)
+# psycopg2-binary (Required for PostgreSQL Production Mode)
+pydantic
+pydantic-settings
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+google-generativeai
+pytest
+pytest-asyncio
+httpx
+python-dotenv
+aiosqlite
+email-validator
+
